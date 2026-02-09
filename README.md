@@ -16,4 +16,4 @@ Create a virtual environment and install dependencies:
 python -m venv .venv
 .\.venv\Scripts\activate.bat
 pip install -U pip
-pip install pandas numpy matplotlib scipy requests pytest ruff black
+pip install pandas numpy matplotlib scipy requests pytest 
