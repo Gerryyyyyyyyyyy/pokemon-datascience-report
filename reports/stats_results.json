@@ -1,0 +1,52 @@
+{
+  "dataset": "pokemon_clean.csv",
+  "qa_checks": {
+    "row_count": 151,
+    "column_count": 15,
+    "missing_values_per_column": {
+      "id": 0,
+      "name": 0,
+      "height": 0,
+      "weight": 0,
+      "base_experience": 0,
+      "types": 0,
+      "hp": 0,
+      "attack": 0,
+      "defense": 0,
+      "special-attack": 0,
+      "special-defense": 0,
+      "speed": 0,
+      "total_stats": 0,
+      "is_dual_type": 0,
+      "primary_type": 0
+    },
+    "total_stats_mismatch_count": 0,
+    "types_missing_count": 0,
+    "dual_type_count": 67,
+    "mono_type_count": 84,
+    "duplicate_rows_count": 0,
+    "duplicate_name_count": 0
+  },
+  "summary_metrics": {
+    "n_pokemon": 151,
+    "n_dual_type": 67,
+    "n_mono_type": 84,
+    "pct_dual_type": 44.37,
+    "total_stats_mean": 407.64,
+    "total_stats_median": 405.0,
+    "total_stats_min": 195,
+    "total_stats_max": 680,
+    "top_total_stats_frequencies": {
+      "490": 8,
+      "500": 7,
+      "405": 6,
+      "325": 6,
+      "300": 5,
+      "455": 5,
+      "320": 5,
+      "525": 5,
+      "395": 4,
+      "450": 4
+    }
+  }
+}
