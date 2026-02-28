@@ -1,0 +1,37 @@
+{
+  "hypothesis": "Dual-type Pokemon have higher average total_stats than mono-type Pokemon",
+  "metric": "total_stats",
+  "groups": {
+    "mono_type": "is_dual_type == False",
+    "dual_type": "is_dual_type == True"
+  },
+  "group_summary": {
+    "mono": {
+      "n": 84,
+      "mean_total_stats": 397.7,
+      "median_total_stats": 405.0,
+      "std_total_stats": 98.57
+    },
+    "dual": {
+      "n": 67,
+      "mean_total_stats": 420.1,
+      "median_total_stats": 442.0,
+      "std_total_stats": 100.83
+    },
+    "mean_diff_dual_minus_mono": 22.4,
+    "median_diff_dual_minus_mono": 37.0
+  },
+  "bootstrap_mean_difference_dual_minus_mono": {
+    "n_bootstrap": 5000,
+    "bootstrap_mean_diff_mean": 22.6993,
+    "ci_95_low": -9.3906,
+    "ci_95_high": 53.7626
+  },
+  "bootstrap_median_difference_dual_minus_mono": {
+    "n_bootstrap": 5000,
+    "bootstrap_median_diff_mean": 35.292,
+    "ci_95_low": -30.0,
+    "ci_95_high": 110.0
+  },
+  "interpretation_hint": "If the 95% CI is entirely above 0, the data supports that dual-type Pokemon have a higher average total_stats in this dataset."
+}
