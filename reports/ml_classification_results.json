@@ -1,0 +1,113 @@
+{
+  "task": "Classification: predict is_dual_type from base stats",
+  "target": "is_dual_type",
+  "target_mapping": {
+    "0": "mono_type",
+    "1": "dual_type"
+  },
+  "features": [
+    "hp",
+    "attack",
+    "defense",
+    "special-attack",
+    "special-defense",
+    "speed"
+  ],
+  "train_size": 120,
+  "test_size": 31,
+  "class_balance": {
+    "train": {
+      "0": 67,
+      "1": 53
+    },
+    "test": {
+      "0": 17,
+      "1": 14
+    }
+  },
+  "preprocessing": {
+    "logistic_regression": [
+      "SimpleImputer(strategy='median')",
+      "StandardScaler()",
+      "LogisticRegression(max_iter=1000)"
+    ],
+    "random_forest_classifier": [
+      "SimpleImputer(strategy='median')",
+      "RandomForestClassifier(...)"
+    ]
+  },
+  "baseline_majority_predictor": {
+    "metrics": {
+      "accuracy": 0.5484,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "confusion_matrix": {
+      "tn_mono_pred_mono": 17,
+      "fp_mono_pred_dual": 0,
+      "fn_dual_pred_mono": 14,
+      "tp_dual_pred_dual": 0
+    }
+  },
+  "logistic_regression": {
+    "metrics": {
+      "accuracy": 0.4839,
+      "precision": 0.375,
+      "recall": 0.2143,
+      "f1": 0.2727
+    },
+    "confusion_matrix": {
+      "tn_mono_pred_mono": 12,
+      "fp_mono_pred_dual": 5,
+      "fn_dual_pred_mono": 11,
+      "tp_dual_pred_dual": 3
+    }
+  },
+  "random_forest_classifier": {
+    "metrics": {
+      "accuracy": 0.4516,
+      "precision": 0.3333,
+      "recall": 0.2143,
+      "f1": 0.2609
+    },
+    "confusion_matrix": {
+      "tn_mono_pred_mono": 11,
+      "fp_mono_pred_dual": 6,
+      "fn_dual_pred_mono": 11,
+      "tp_dual_pred_dual": 3
+    }
+  },
+  "notes": [
+    "This is a learning-focused classification task on a small dataset.",
+    "Preprocessing is handled via sklearn Pipelines to avoid leakage."
+  ],
+  "cross_validation": {
+    "logistic_regression_pipeline": {
+      "cv_n_splits": 5,
+      "accuracy_mean": 0.5819,
+      "accuracy_std": 0.0872,
+      "precision_mean": 0.5597,
+      "precision_std": 0.133,
+      "recall_mean": 0.4326,
+      "recall_std": 0.1006,
+      "f1_mean": 0.4741,
+      "f1_std": 0.0588
+    },
+    "random_forest_classifier_pipeline": {
+      "cv_n_splits": 5,
+      "accuracy_mean": 0.5159,
+      "accuracy_std": 0.0871,
+      "precision_mean": 0.4584,
+      "precision_std": 0.1019,
+      "recall_mean": 0.4145,
+      "recall_std": 0.1026,
+      "f1_mean": 0.4255,
+      "f1_std": 0.0772
+    },
+    "notes": [
+      "Cross-validation complements the single holdout split.",
+      "Pipelines ensure fold-wise preprocessing without leakage."
+    ]
+  }
+}
