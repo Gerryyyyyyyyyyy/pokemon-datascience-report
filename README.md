@@ -7,6 +7,7 @@ A reproducible, code-only data pipeline and analysis project on Pokémon base st
 * `scripts/` - runnable pipeline steps (fetch, clean, eda, stats, hypothesis tests, ML regression, ML classification)
 * `src/pokemon_ds/` - reusable code (fetching, cleaning, plotting, statistics, hypothesis testing, regression modeling, classification modeling)
 * `data/` - raw/processed datasets (ignored by git)
+* `app/` - FastAPI application 
 * `reports/` - generated figures + `report.md` + JSON result files
 
 ## Setup
@@ -158,9 +159,55 @@ Outputs:
 * `data/processed/rf_classifier_feature_importance.csv`
 * ML classification plots in `reports/figures/`
 
+### 8) Deployment (FastAPI)
+
+Implemented a FastAPI service to expose analytics and ML functionality via HTTP.
+
+Endpoints:
+* `GET /health` - health check + confirms dataset/model are loaded
+* `GET /top?metric=total_stats&n=10` - top N Pokémon by metric
+* `GET /summary/types` - primary type counts + type occurrence counts
+* `POST /predict/base-experience` - predicts `base_experience` from base stats
+
+Files:
+* `app/main.py` - FastAPI application
+* `src/pokemon_ds/api_service.py` - service logic (load data, summaries, prediction helper)
+
 ## How to run the current pipeline
 
 > In PowerShell/CMD, set `PYTHONPATH=src` so imports from `src/pokemon_ds` work.
+
+## Run the API
+
+### Install API dependencies
+PowerShell: 
+..venv\Scripts\python.exe -m pip install fastapi "uvicorn[standard]"
+
+### Start the server
+PowerShell:
+
+$env:PYTHONPATH="src"
+..venv\Scripts\python.exe -m uvicorn app.main:app --reload
+
+Open:
+* http://127.0.0.1:8000/health
+* http://127.0.0.1:8000/docs
+
+### Example request (prediction)
+PowerShell:
+
+$body = @{
+hp = 80
+attack = 82
+defense = 83
+"special-attack" = 100
+"special-defense" = 100
+speed = 80
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri http://127.0.0.1:8000/predict/base-experience
+-Method Post -ContentType "application/json"
+-Body $body
 
 ### PowerShell
 
